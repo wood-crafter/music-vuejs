@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
+  <div class="live">
     <Menu class="menu"/>
-    <div class="content">Home</div>
+    <div class="content">Live</div>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.live {
   display: flex;
   flex-direction: row;
 }

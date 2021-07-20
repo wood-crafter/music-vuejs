@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
+  <div class="chart">
     <Menu class="menu"/>
-    <div class="content">Home</div>
+    <div class="content">Chart</div>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.chart {
   display: flex;
   flex-direction: row;
 }
