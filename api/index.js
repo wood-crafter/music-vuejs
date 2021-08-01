@@ -5,6 +5,7 @@ const cors = require('cors')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const userService = require('./users.service')
+const songsService = require('./songs.service')
 
 const app = express()
 const PORT = 8080
@@ -60,6 +61,49 @@ app.post('/signin', async (req, res) => {
     res.sendStatus(400)
     return
   }
+})
+
+app.head('/auth', (req, res) => {
+  const authHeader = req.headers.authorization
+
+  if (!authHeader) {
+    res.sendStatus(401)
+    return
+  }
+
+  const token = authHeader.substring('Bearer '.length)
+
+  jwt.verify(token, SECRET_KEY, (err, payload) => {
+    if (err) {
+      console.error(err)
+      res.sendStatus(401)
+      return
+    }
+    res.sendStatus(200)
+  })
+})
+
+app.get('/songs/top/:amount', async (req, res) => {
+  const amount = req.params.amount
+  const topSong = await songsService.getTop(amount)
+  console.info(topSong)
+
+  res.send(topSong)
+})
+
+app.get('/public/:filename', (req, res) => {
+  const filename = `${req.params.filename}.mp3`
+  const filePath = path.join(__dirname, '../public/songs', filename)
+  console.info(filePath)
+
+  fs.access(filePath, fs.constants.R_OK, (err) => {
+    if (err) {
+      console.error(err)
+      return res.sendStatus(err.code === 'ENOENT' ? 404 : 400)
+    }
+
+    res.download(filePath)
+  })
 })
 
 const hashPromise = (password, saltRounds) => {

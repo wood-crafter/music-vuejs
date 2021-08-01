@@ -6,12 +6,32 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@400;500&display=swap');
+  
+      :root {
+        --text-color: #000000;
+        --boder-color: #000000;
+      }
+  
+      * {
+        font-family: 'Baloo Tammudu 2', cursive;
+      }
+  
+      body {
+        background-color: var(--back-color);
+        min-height: 100vh;
+        margin: 0;
+      }
+    </style>
   </head>
   <body style="margin: 0">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   </body>
 </html>
