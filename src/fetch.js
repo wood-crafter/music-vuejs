@@ -24,15 +24,22 @@ export const signin = (username, password) => {
   })
 }
 
-export const getTopFiveTrending = () => {
-  return fetch(`${API_ROOT}/songs/top/5`)
+export const getTopTrending = (amount) => {
+  return fetch(`${API_ROOT}/songs/top/${amount}`)
     .then(res => {
       return res.json()
     })
 }
 
-export const getTopFiveNews = () => {
-  return fetch(`${API_ROOT}/songs/news/5`)
+export const getTopNews = (amount) => {
+  return fetch(`${API_ROOT}/songs/news/${amount}`)
+    .then(res => {
+      return res.json()
+    })
+}
+
+export const getTopArtist = (amount) => {
+  return fetch(`${API_ROOT}/artists/top/${amount}`)
     .then(res => {
       return res.json()
     })

@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const userService = require('./users.service')
 const songsService = require('./songs.service')
+const artistService = require('./artists.service')
 
 const app = express()
 const PORT = 8080
@@ -86,17 +87,22 @@ app.head('/auth', (req, res) => {
 app.get('/songs/top/:amount', async (req, res) => {
   const amount = req.params.amount
   const topSong = await songsService.getTop(amount)
-  console.info(topSong)
 
   res.send(topSong)
 })
 
 app.get('/songs/news/:amount', async (req, res) => {
   const amount = req.params.amount
-  const topSong = await songsService.getNews(amount)
-  console.info(topSong)
+  const news = await songsService.getNews(amount)
 
-  res.send(topSong)
+  res.send(news)
+})
+
+app.get('/artists/top/:amount', async (req, res) => {
+  const amount = req.params.amount
+  const topArtist = await artistService.getTop(amount)
+
+  res.send(topArtist)
 })
 
 app.get('/public/:filename', (req, res) => {

@@ -16,7 +16,12 @@ export default {
   components: {
     Menu,
     Extensions
-  }
+  },
+  data () {
+    return {
+      id: this.$route.params.id
+    }
+  },
 }
 </script>
 
