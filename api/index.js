@@ -91,6 +91,14 @@ app.get('/songs/top/:amount', async (req, res) => {
   res.send(topSong)
 })
 
+app.get('/songs/news/:amount', async (req, res) => {
+  const amount = req.params.amount
+  const topSong = await songsService.getNews(amount)
+  console.info(topSong)
+
+  res.send(topSong)
+})
+
 app.get('/public/:filename', (req, res) => {
   const filename = `${req.params.filename}.mp3`
   const filePath = path.join(__dirname, '../public/songs', filename)

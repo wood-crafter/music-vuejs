@@ -31,6 +31,13 @@ export const getTopFiveTrending = () => {
     })
 }
 
+export const getTopFiveNews = () => {
+  return fetch(`${API_ROOT}/songs/news/5`)
+    .then(res => {
+      return res.json()
+    })
+}
+
 export const getSongById = (id) => {
   return `${API_ROOT}/public/${id}`
 }

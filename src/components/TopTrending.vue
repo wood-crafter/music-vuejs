@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { getSongById } from '../../fetch.js'
+import { getSongById } from '../fetch.js'
 export default {
   props: ["songs"],
   data () {
