@@ -45,8 +45,19 @@ export const getTopArtist = (amount) => {
     })
 }
 
+export const getArtistById = (id) => {
+  return fetch(`${API_ROOT}/artists/${id}`)
+    .then(res => {
+      return res.json()
+    })
+}
+
 export const getSongById = (id) => {
-  return `${API_ROOT}/public/${id}`
+  return `${API_ROOT}/public/song/${id}`
+}
+
+export const getArtistAvatarURL = (id) => {
+  return `${API_ROOT}/public/artist/${id}`
 }
 
 export const signup = (username, password) => {

@@ -3,7 +3,7 @@
     <Menu class="menu"/>
     <div class="content">
       <Extensions />
-      <div></div>
+      <ArtistDetail v-if="id" :id="id"/>
     </div>
   </div>
 </template>
@@ -11,11 +11,13 @@
 <script>
 import Menu from '../components/Menu.vue'
 import Extensions from '../components/Extensions.vue'
+import ArtistDetail from '../components/Artist/ArtistDetail.vue'
 
 export default {
   components: {
     Menu,
-    Extensions
+    Extensions,
+    ArtistDetail
   },
   data () {
     return {
@@ -32,6 +34,9 @@ export default {
 }
 .menu {
   width: 10rem;
+  position: sticky;
+  left: 0;
+  top: 0;
 }
 .content {
   background-image: linear-gradient(rgba(255, 170, 23, 1), rgba(255, 181, 73, 0.93));

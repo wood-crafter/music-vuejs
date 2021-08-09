@@ -1,5 +1,5 @@
 <template>
-  <div class="top-trending">
+  <div class="hot-artist">
     <div class="title">Hot Artist</div>
     <div v-for="artist in artists" :key="artist.id" class="artist" @click="handleArtistClicked(artist.id)">
       {{ artist.name }}

@@ -105,9 +105,31 @@ app.get('/artists/top/:amount', async (req, res) => {
   res.send(topArtist)
 })
 
-app.get('/public/:filename', (req, res) => {
+app.get('/artists/:id', async (req, res) => {
+  const id = req.params.id
+  const artist = await artistService.getById(id)
+
+  res.send(artist)
+})
+
+app.get('/public/song/:filename', (req, res) => {
   const filename = `${req.params.filename}.mp3`
   const filePath = path.join(__dirname, '../public/songs', filename)
+  console.info(filePath)
+
+  fs.access(filePath, fs.constants.R_OK, (err) => {
+    if (err) {
+      console.error(err)
+      return res.sendStatus(err.code === 'ENOENT' ? 404 : 400)
+    }
+
+    res.download(filePath)
+  })
+})
+
+app.get('/public/artist/:filename', (req, res) => {
+  const filename = `${req.params.filename}.jpg`
+  const filePath = path.join(__dirname, '../public/artists', filename)
   console.info(filePath)
 
   fs.access(filePath, fs.constants.R_OK, (err) => {

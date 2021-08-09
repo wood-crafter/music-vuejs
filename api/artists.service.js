@@ -14,6 +14,20 @@ const getTop = (amount) => {
   })
 }
 
+const getById = (id) => {
+  return new Promise((resolve, reject) => {
+    connection.query(`SELECT * FROM artist WHERE id = ${id}`, (e, result, fields) => {
+      if(e){
+        console.error(e)
+        reject(e)
+      } else {
+        resolve(result[0])
+      }
+    })
+  })
+}
+
 module.exports = {
   getTop,
+  getById
 }

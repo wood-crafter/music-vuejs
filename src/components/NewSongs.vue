@@ -1,5 +1,5 @@
 <template>
-  <div class="top-trending">
+  <div class="new-songs">
     <div class="title">News</div>
     <div v-for="song in songs" :key="song.id" class="song" @click="handleSongClicked(song.id)">
       {{ song.name }}
