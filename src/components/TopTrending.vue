@@ -4,7 +4,6 @@
     <div v-for="(song, index) in songs" :key="song.id" class="song">
       <Song :song="song" :topNum="index + 1" @song-clicked="handleSongClicked"/>
     </div>
-    <audio :src="songURL" v-if="songURL" autoplay controls></audio>
   </div>
 </template>
 
@@ -24,6 +23,7 @@ export default {
   methods: {
     handleSongClicked(id) {
       this.songURL = getSongById(id)
+      this.$emit('song-clicked', this.songURL)
     }
   }
 };

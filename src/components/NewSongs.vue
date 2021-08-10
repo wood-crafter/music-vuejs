@@ -1,34 +1,48 @@
 <template>
   <div class="new-songs">
     <div class="title">News</div>
-    <div v-for="song in songs" :key="song.id" class="song" @click="handleSongClicked(song.id)">
-      {{ song.name }}
+    <div class="content">
+      <div v-for="song in songs" :key="song.id" class="song">
+        <SongPoster :song="song" @song-clicked="handleSongClicked" />
+      </div>
     </div>
-    <audio :src="songURL" v-if="songURL" autoplay controls></audio>
   </div>
 </template>
 
 <script>
-import { getSongById } from '../fetch.js'
+import { getSongById } from "../fetch.js";
+import SongPoster from "./SongPoster.vue";
 export default {
   props: ["songs"],
-  data () {
+  components: {
+    SongPoster,
+  },
+  data() {
     return {
       songURL: "",
-    }
+    };
   },
   methods: {
     handleSongClicked(id) {
-      this.songURL = getSongById(id)
-    }
-  }
+      this.songURL = getSongById(id);
+      this.$emit("song-clicked", this.songURL);
+    },
+  },
 };
 </script>
 
 <style scoped>
+.new-songs {
+  max-width: 100%;
+}
+.content {
+  display: flex;
+  overflow-x: auto;
+}
 .song {
-  padding-left: 2rem;
-  text-align: start;
+  margin: 0.3rem;
+  width: 25rem;
+  height: 20rem;
   cursor: pointer;
 }
 .song:hover {

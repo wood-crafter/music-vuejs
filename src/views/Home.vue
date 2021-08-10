@@ -3,10 +3,10 @@
     <Menu class="menu"/>
     <div class="content">
       <Extensions />
-      <TopTrending v-if="topTrending" :songs="topTrending" />
-      <NewSongs v-if="newSongs" :songs="newSongs" />
+      <TopTrending v-if="topTrending" :songs="topTrending" @song-clicked="handleSongClicked" />
+      <NewSongs v-if="newSongs" :songs="newSongs" @song-clicked="handleSongClicked" />
       <HotArtist v-if="hotArtists" :artists="hotArtists" @artistClicked="handleArtistClicked" />
-      <div></div>
+      <audio :src="songURL" v-if="songURL" autoplay controls></audio>
     </div>
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
       topTrending: [],
       newSongs: [],
       hotArtists: [],
+      songURL: "",
     }
   },
   components: {
@@ -42,6 +43,9 @@ export default {
   methods: {
     handleArtistClicked(id) {
       this.$router.push(`/artist/${id}`)
+    },
+    handleSongClicked(url) {
+      this.songURL = url
     }
   }
 }
@@ -51,6 +55,7 @@ export default {
 .home {
   display: flex;
   flex-direction: row;
+  max-width: 100vw;
 }
 .menu {
   width: 10rem;
@@ -61,5 +66,6 @@ export default {
 .content {
   background-image: linear-gradient(rgba(255, 170, 23, 1), rgba(255, 181, 73, 0.93));
   flex-grow: 15;
+  max-width: calc(100% - 10rem);
 }
 </style>
