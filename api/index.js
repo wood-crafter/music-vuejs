@@ -142,6 +142,21 @@ app.get('/public/artist/:filename', (req, res) => {
   })
 })
 
+app.get('/public/songs_avatar/:filename', (req, res) => {
+  const filename = `${req.params.filename}.jpg`
+  const filePath = path.join(__dirname, '../public/songs_avatar', filename)
+  console.info(filePath)
+
+  fs.access(filePath, fs.constants.R_OK, (err) => {
+    if (err) {
+      console.error(err)
+      return res.sendStatus(err.code === 'ENOENT' ? 404 : 400)
+    }
+
+    res.download(filePath)
+  })
+})
+
 const hashPromise = (password, saltRounds) => {
   return new Promise((resolve, reject) => {
     bcrypt.hash(password, saltRounds, function (e, hash) {

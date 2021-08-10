@@ -60,6 +60,10 @@ export const getArtistAvatarURL = (id) => {
   return `${API_ROOT}/public/artist/${id}`
 }
 
+export const getSongsAvatarURL = (id) => {
+  return `${API_ROOT}/public/songs_avatar/${id}`
+}
+
 export const signup = (username, password) => {
   return fetch(`${API_ROOT}/signup`, {
     method: "POST",

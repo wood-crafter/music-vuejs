@@ -1,7 +1,10 @@
 <template>
   <div class="artist-detail">
-    <img :src="artistAvatarURL" alt="" class="artist-avatar">
-    <div>{{artist.name}}</div>
+    <div class="title">
+      <div class="artist-avatar" :style="`background-image: url(${artistAvatarURL});`"></div>
+      <div class="artist-name">{{ artist.name }}</div>
+    </div>
+    <div class="artist-about"></div>
   </div>
 </template>
 
@@ -27,11 +30,28 @@ export default {
 <style scoped>
 .artist-detail {
   display: flex;
+  flex-direction: row;
+}
+.title {
+  margin-left: 5rem;
+  width: 10rem;
+  display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .artist-avatar {
   width: 10rem;
+  height: 10rem;
   cursor: pointer;
-  margin-left: 5rem;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+}
+.artist-about {
+  margin-left: 2rem;
+}
+.artist-name {
+  color: rgb(1, 27, 173);
+  font-size: 1.5rem;
 }
 </style>

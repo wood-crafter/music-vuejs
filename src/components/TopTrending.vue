@@ -1,8 +1,8 @@
 <template>
   <div class="top-trending">
     <div class="title">Top Trending</div>
-    <div v-for="song in songs" :key="song.id" class="song" @click="handleSongClicked(song.id)">
-      {{ song.name }}
+    <div v-for="(song, index) in songs" :key="song.id" class="song">
+      <Song :song="song" :topNum="index + 1" @song-clicked="handleSongClicked"/>
     </div>
     <audio :src="songURL" v-if="songURL" autoplay controls></audio>
   </div>
@@ -10,12 +10,16 @@
 
 <script>
 import { getSongById } from '../fetch.js'
+import Song from './Song.vue'
 export default {
   props: ["songs"],
   data () {
     return {
       songURL: "",
     }
+  },
+  components: {
+    Song
   },
   methods: {
     handleSongClicked(id) {
@@ -28,11 +32,9 @@ export default {
 <style scoped>
 .song {
   padding-left: 2rem;
+  padding-right: 2rem;
   text-align: start;
-  cursor: pointer;
-}
-.song:hover {
-  color: rgb(238, 221, 221);
+  margin-bottom: 0.5rem;
 }
 .title {
   font-size: 2rem;
